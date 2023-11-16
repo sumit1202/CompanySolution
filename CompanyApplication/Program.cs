@@ -1,7 +1,7 @@
 using CompanyApplication.Contexts;
-//using CompanyApplication.Interfaces;
+using CompanyApplication.Interfaces;
 using CompanyApplication.Models;
-//using CompanyApplication.Repositories;
+using CompanyApplication.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompanyApplication
@@ -16,16 +16,16 @@ namespace CompanyApplication
             builder.Services.AddControllersWithViews();
 
 
-            #region AddingConetexts
+            #region AddingContexts
             builder.Services.AddDbContext<CompanyContext>(opts =>
             {
                 opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             #endregion
 
-            #region AddingUserderfinedServices
-            //builder.Services.AddScoped<IRepository<int, Department>, DepartmentRepository>();
-            //builder.Services.AddScoped<IRepository<int, Employee>, EmployeeRepository>();
+            #region AddingUserDefinedServices
+            builder.Services.AddScoped<IRepository<int, Department>, DepartmentRepository>();
+            builder.Services.AddScoped<IRepository<int, Employee>, EmployeeRepository>();
             #endregion
 
             var app = builder.Build();
